@@ -32,6 +32,5 @@ public class UpdateView extends HttpServlet {
 		}
 		
 	}
-
 	
 }
