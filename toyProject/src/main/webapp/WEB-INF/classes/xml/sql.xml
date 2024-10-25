@@ -12,4 +12,32 @@
 			STD_SCORE 
 		FROM TB_STUDENT
 	</entry>
+	
+	<entry key="detailStdNoSelect">
+		SELECT
+			STD_NO,
+			STD_NAME,
+			STD_AGE,
+			STD_GENDER,
+			STD_SCORE 
+		FROM TB_STUDENT
+		WHERE STD_NO = ?
+	</entry>
+	
+	<entry key="deleteStudent">
+		DELETE FROM TB_STUDENT WHERE STD_NO = ?	
+	</entry>
+	
+	<entry key="addStudent">
+		INSERT INTO TB_STUDENT VALUES(STD_SEQ_NO.NEXTVAL, ?, ?, ?, ?)
+	</entry>
+	
+	<entry key="updateStudent">
+		UPDATE TB_STUDENT
+		SET STD_NAME = ?,
+		STD_AGE = ?,
+		STD_SCORE = ?
+		WHERE STD_NO = ?
+	</entry>
+	
 </properties>

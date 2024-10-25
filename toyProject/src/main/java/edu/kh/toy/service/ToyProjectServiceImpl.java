@@ -24,4 +24,72 @@ public class ToyProjectServiceImpl implements ToyProjectService {
 		
 		return stdList;
 	}
+
+	@Override
+	public Student detailStdNoSelect(int stdNo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		Student std = dao.detailStdNoSelect(conn, stdNo);
+		
+		close(conn);
+				
+		return std;
+	}
+
+	@Override
+	public int deleteStudent(int stdNo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.deleteStudent(conn, stdNo);
+		
+		if(result > 0 ) commit(conn);
+		else			rollback(conn);
+
+		close(conn);
+		
+		return result;
+	}
+
+	
+	public boolean checkStdNo(int stdNo) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		if( dao.detailStdNoSelect(conn, stdNo) == null ) return true;
+		
+		return false;
+	}
+
+	@Override
+	public int addStudent(Student std) throws Exception {
+		
+		Connection conn = getConnection();
+		
+		int result = dao.addStudent(conn, std);
+		
+		if( result > 0 ) commit(conn);
+		else			 rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	@Override
+	public int updateStudent(Student std) throws Exception {
+
+		Connection conn = getConnection();
+		
+		int result = dao.updateStudent(conn, std);
+		
+		close(conn);
+		
+		return result;
+		
+	}
+
+	
+	
 }

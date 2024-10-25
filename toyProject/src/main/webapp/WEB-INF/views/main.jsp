@@ -1,69 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<html lang="ko">
 <html>
 <head>
     <meta charset="UTF-8">
     <title>학생 목록</title>
-    <style>
-        .container {
-            width: 66.67%;
-            margin: 0 auto;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        .main-title {
-            width: 100%;
-            text-align: center;
-            font-size: 2em;
-            margin: 20px 0;
-        }
-        .total-count {
-            font-size: 0.9em;
-            color: #666;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #f4f4f4;
-        }
-        .student-name {
-            color: blue;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-        .student-number {
-            font-weight: bold;
-        }
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-            margin-top: 20px;
-        }
-        .add-button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .add-button:hover {
-            background-color: #45a049;
-        }
-    </style>
+
+	<link rel="stylesheet" href="/resources/css/main.css">
 </head>
 
 <body>
@@ -81,7 +26,7 @@
                 <tr>
                     <th>번호</th>
                     <th>이름</th>
-                    <th>성적</th>
+                    <th>학점</th>
                 </tr>
             </thead>
             <tbody>
@@ -89,7 +34,7 @@
                     <tr>
                         <td class="student-number">${std.stdNo}</td>
                         <td>
-                            <a href="studentDetail?id=${student.id}" class="student-name">
+                            <a href="/student/detail?stdNo=${std.stdNo }" class="student-name">
                                 ${std.stdName}
                             </a>
                         </td>
@@ -100,10 +45,20 @@
         </table>
         
         <div class="button-container">
-            <button onclick="location.href='addStudent'" class="add-button">
+            <button id="add-button">
                 학생 추가
             </button>
         </div>
     </div>
+    
+    <c:if test="${not empty sessionScope.message}">
+	  	<script>
+	  		alert("${message}");
+	  	</script>
+	  	
+	  	<%-- message를 한 번만 출력하고 제거 --%>
+	  	<c:remove var="message" scope="session" />
+	</c:if>
+	<script src="/resources/js/main.js"></script>
 </body>
 </html>
